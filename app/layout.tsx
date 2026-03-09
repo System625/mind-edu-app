@@ -3,6 +3,7 @@ import { Manrope, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import LayoutWrapper from "@/components/LayoutWrapper";
 
 const manrope = Manrope({
@@ -40,6 +41,7 @@ export default function RootLayout({
         <AuthProvider>
           <Header />
           <LayoutWrapper>{children}</LayoutWrapper>
+          <Footer />
         </AuthProvider>
       </body>
     </html>

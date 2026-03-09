@@ -110,10 +110,9 @@ export async function POST(request: NextRequest) {
       mood: mood || null,
     };
 
-    // TypeScript can't infer the correct type from the generic Database type on route handler clients
-    const { data, error } = await supabase
-      .from('journals')
-      // @ts-expect-error - insertData is correctly typed as JournalInsert, but TS can't infer through route handler client
+    // TypeScript may need a hint for Postgrest generic types when using custom Insert types
+    const { data, error } = await (supabase
+      .from('journals') as any)
       .insert(insertData)
       .select()
       .single();

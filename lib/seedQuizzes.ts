@@ -264,10 +264,9 @@ export async function seedQuizzes(): Promise<{
       updated_at: new Date().toISOString(),
     }));
 
-    // TypeScript cannot properly infer Database generic types with client-side supabase client
-    const { data, error } = await supabase
-      .from('quizzes')
-      // @ts-expect-error - quizzesToInsert is correctly typed as QuizInsert[], but TS can't infer through client
+    // TypeScript may need a hint for Postgrest generic types when using custom Insert types
+    const { data, error } = await (supabase
+      .from('quizzes') as any)
       .insert(quizzesToInsert)
       .select();
 

@@ -32,7 +32,7 @@ export default function Header() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} // Out-Expo premium easing
-      className={`fixed top-0 z-50 w-full flex justify-center transition-all duration-700 pt-6 px-6 sm:px-12`}
+      className={`fixed top-0 z-50 w-full flex flex-col items-center transition-all duration-700 pt-6 px-6 sm:px-12`}
     >
       <div className={`
         flex items-center justify-between w-full max-w-7xl h-14 sm:h-16 px-6 sm:px-10 rounded-full transition-all duration-700
@@ -117,10 +117,10 @@ export default function Header() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-foreground/5 bg-background/95 backdrop-blur-[24px] overflow-hidden"
+            initial={{ opacity: 0, y: -20, height: 0 }}
+            animate={{ opacity: 1, y: 0, height: 'auto' }}
+            exit={{ opacity: 0, y: -20, height: 0 }}
+            className="md:hidden mt-2 w-full max-w-7xl bg-background/95 backdrop-blur-[24px] overflow-hidden rounded-3xl border border-foreground/5 shadow-2xl"
           >
             <nav className="container mx-auto px-6 py-6 flex flex-col space-y-4">
               <Link
@@ -137,24 +137,20 @@ export default function Header() {
               >
                 Quizzes
               </Link>
-              {user && (
-                <>
-                  <Link
-                    href="/dashboard"
-                    className="text-lg font-bold tracking-tight text-foreground/80 hover:text-primary transition-colors py-2"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Dashboard
-                  </Link>
-                  <Link
-                    href="/coping"
-                    className="text-lg font-bold tracking-tight text-foreground/80 hover:text-primary transition-colors py-2"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Coping
-                  </Link>
-                </>
-              )}
+              <Link
+                href="/dashboard"
+                className="text-lg font-bold tracking-tight text-foreground/80 hover:text-primary transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Dashboard
+              </Link>
+              <Link
+                href="/coping"
+                className="text-lg font-bold tracking-tight text-foreground/80 hover:text-primary transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Coping
+              </Link>
               <div className="pt-6 border-t border-foreground/10">
                 {user ? (
                   <div className="space-y-4">

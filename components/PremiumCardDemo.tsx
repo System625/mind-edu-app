@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import * as motion from 'framer-motion/client'
 import { ArrowRight, Sparkles } from 'lucide-react'
 
 /**
@@ -31,7 +31,7 @@ export default function PremiumCardDemo() {
             y: 0,
             transition: {
                 duration: 0.5,
-                ease: [0.16, 1, 0.3, 1], // Out-Expo
+                ease: [0.16, 1, 0.3, 1] as const, // Out-Expo
             },
         },
     }
