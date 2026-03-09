@@ -3,14 +3,24 @@
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
-import { Button } from '@/components/ui/button';
-import { Brain, LogOut, User, Menu } from 'lucide-react';
-import { useState } from 'react';
+import { Brain, LogOut, User, Menu, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Header() {
   const { user, signOut } = useAuth();
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Detect scroll to add glassmorphism background
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleSignOut = async () => {
     await signOut();
@@ -18,150 +28,169 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-          <Brain className="h-6 w-6 text-primary" />
-          <span className="text-xl font-bold text-foreground">MindEdu Hub</span>
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} // Out-Expo premium easing
+      className={`fixed top-0 z-50 w-full flex flex-col items-center transition-all duration-700 pt-6 px-6 sm:px-12`}
+    >
+      <div className={`
+        flex items-center justify-between w-full max-w-7xl h-14 sm:h-16 px-6 sm:px-10 rounded-full transition-all duration-700
+        ${scrolled
+          ? 'bg-background/60 backdrop-blur-3xl border border-white/10 shadow-lg translate-y-[-10px]'
+          : 'bg-black/40 backdrop-blur-xl border border-white/5'
+        }
+      `}>
+        {/* Logo Area */}
+        <Link href="/" className="flex items-center space-x-3 group outline-none">
+          <div className="bg-primary/20 p-2 rounded-xl group-hover:scale-110 transition-transform duration-500">
+            <Brain className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+          </div>
+          <span className={`text-xl font-bold tracking-tight transition-colors duration-500 ${scrolled ? 'text-foreground' : 'text-white'}`}>
+            MindEdu Hub
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-6">
-          <Link
-            href="/modules"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Modules
-          </Link>
-          <Link
-            href="/quizzes"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Quizzes
-          </Link>
-          {user && (
-            <>
-              <Link
-                href="/dashboard"
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Dashboard
-              </Link>
-              <Link
-                href="/coping"
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Coping
-              </Link>
-            </>
-          )}
+        <nav className="hidden md:flex items-center space-x-10">
+          {['Modules', 'Quizzes', 'Dashboard', 'Coping'].map((item) => (
+            <Link
+              key={item}
+              href={`/${item.toLowerCase()}`}
+              className={`text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-500 hover:scale-105 ${scrolled ? 'text-foreground/60 hover:text-foreground' : 'text-white/60 hover:text-white'
+                }`}
+            >
+              {item}
+            </Link>
+          ))}
         </nav>
 
         {/* Desktop Auth Buttons */}
-        <div className="hidden md:flex items-center space-x-2">
+        <div className="hidden md:flex items-center space-x-6">
           {user ? (
-            <div className="flex items-center space-x-2">
-              <div className="flex items-center space-x-2 px-3 py-1.5 rounded-md bg-muted">
-                <User className="h-4 w-4 text-muted-foreground" />
-                <span className="text-sm text-muted-foreground">
-                  {user.email || 'Guest User'}
-                </span>
+            <div className="flex items-center space-x-6">
+              <div className={`px-4 py-1.5 rounded-full border text-xs font-semibold transition-all duration-500 ${scrolled ? 'bg-background/50 border-foreground/10 text-foreground' : 'bg-white/5 border-white/10 text-white'
+                }`}>
+                {user.email?.split('@')[0] || 'User'}
               </div>
-              <Button onClick={handleSignOut} variant="outline" size="sm">
-                <LogOut className="h-4 w-4 mr-2" />
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleSignOut}
+                className={`text-[10px] font-bold uppercase tracking-widest transition-colors ${scrolled ? 'text-foreground/60 hover:text-foreground' : 'text-white/60 hover:text-white'
+                  }`}
+              >
                 Logout
-              </Button>
+              </motion.button>
             </div>
           ) : (
             <>
-              <Button asChild variant="ghost" size="sm">
-                <Link href="/auth/login">Log In</Link>
-              </Button>
-              <Button asChild size="sm">
-                <Link href="/auth/signup">Sign Up</Link>
-              </Button>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Link href="/auth/login" className={`text-[10px] font-bold uppercase tracking-widest transition-colors ${scrolled ? 'text-foreground/80 hover:text-foreground' : 'text-white/80 hover:text-white'
+                  }`}>
+                  Log In
+                </Link>
+              </motion.div>
+              <motion.button
+                whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(var(--primary), 0.3)' }}
+                whileTap={{ scale: 0.95 }}
+                className="px-6 py-2 bg-primary text-white text-[10px] font-bold uppercase tracking-widest rounded-full shadow-lg transition-all"
+                onClick={() => router.push('/auth/signup')}
+              >
+                Join Today
+              </motion.button>
             </>
           )}
         </div>
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden p-2 hover:bg-muted rounded-md transition-colors"
+          className={`md:hidden p-2 transition-colors ${scrolled ? 'text-foreground/60' : 'text-white/60'}`}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
         >
-          <Menu className="h-6 w-6" />
+          {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden border-t bg-background">
-          <nav className="container mx-auto px-4 py-4 flex flex-col space-y-3">
-            <Link
-              href="/modules"
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Modules
-            </Link>
-            <Link
-              href="/quizzes"
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Quizzes
-            </Link>
-            {user && (
-              <>
-                <Link
-                  href="/dashboard"
-                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Dashboard
-                </Link>
-                <Link
-                  href="/coping"
-                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Coping
-                </Link>
-              </>
-            )}
-            <div className="pt-3 border-t">
-              {user ? (
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-2 px-3 py-2 rounded-md bg-muted">
-                    <User className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-sm text-muted-foreground">
-                      {user.email || 'Guest User'}
-                    </span>
+      {/* Mobile Menu (Animated) */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20, height: 0 }}
+            animate={{ opacity: 1, y: 0, height: 'auto' }}
+            exit={{ opacity: 0, y: -20, height: 0 }}
+            className="md:hidden mt-2 w-full max-w-7xl bg-background/95 backdrop-blur-[24px] overflow-hidden rounded-3xl border border-foreground/5 shadow-2xl"
+          >
+            <nav className="container mx-auto px-6 py-6 flex flex-col space-y-4">
+              <Link
+                href="/modules"
+                className="text-lg font-bold tracking-tight text-foreground/80 hover:text-primary transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Modules
+              </Link>
+              <Link
+                href="/quizzes"
+                className="text-lg font-bold tracking-tight text-foreground/80 hover:text-primary transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Quizzes
+              </Link>
+              <Link
+                href="/dashboard"
+                className="text-lg font-bold tracking-tight text-foreground/80 hover:text-primary transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Dashboard
+              </Link>
+              <Link
+                href="/coping"
+                className="text-lg font-bold tracking-tight text-foreground/80 hover:text-primary transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Coping
+              </Link>
+              <div className="pt-6 border-t border-foreground/10">
+                {user ? (
+                  <div className="space-y-4">
+                    <div className="flex items-center space-x-3 px-4 py-3 rounded-2xl bg-muted">
+                      <User className="h-5 w-5 text-primary" />
+                      <span className="text-base font-medium text-foreground/80">
+                        {user.email || 'Guest User'}
+                      </span>
+                    </div>
+                    <button
+                      onClick={handleSignOut}
+                      className="w-full flex justify-center items-center px-6 py-3 border border-foreground/20 rounded-full font-bold text-foreground hover:bg-foreground/5 transition-colors"
+                    >
+                      <LogOut className="h-5 w-5 mr-2" />
+                      Logout
+                    </button>
                   </div>
-                  <Button onClick={handleSignOut} variant="outline" className="w-full">
-                    <LogOut className="h-4 w-4 mr-2" />
-                    Logout
-                  </Button>
-                </div>
-              ) : (
-                <div className="space-y-2">
-                  <Button asChild variant="ghost" className="w-full">
-                    <Link href="/auth/login" onClick={() => setMobileMenuOpen(false)}>
+                ) : (
+                  <div className="flex flex-col space-y-3">
+                    <Link
+                      href="/auth/login"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="w-full flex justify-center items-center px-6 py-3 border border-foreground/20 rounded-full font-bold text-foreground hover:bg-foreground/5 transition-colors"
+                    >
                       Log In
                     </Link>
-                  </Button>
-                  <Button asChild className="w-full">
-                    <Link href="/auth/signup" onClick={() => setMobileMenuOpen(false)}>
-                      Sign Up
+                    <Link
+                      href="/auth/signup"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="w-full flex justify-center items-center px-6 py-3 bg-primary text-white rounded-full font-bold shadow-md hover:shadow-lg transition-all"
+                    >
+                      Get Started
                     </Link>
-                  </Button>
-                </div>
-              )}
-            </div>
-          </nav>
-        </div>
-      )}
-    </header>
+                  </div>
+                )}
+              </div>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 }
