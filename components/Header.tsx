@@ -3,12 +3,14 @@
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
-import { Brain, LogOut, User, Menu, X } from 'lucide-react';
+import { useTour } from '@/contexts/TourContext';
+import { Brain, LogOut, User, Menu, X, Compass } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Header() {
   const { user, signOut } = useAuth();
+  const { startTour } = useTour();
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -57,6 +59,7 @@ export default function Header() {
             <Link
               key={item}
               href={`/${item.toLowerCase()}`}
+              data-tour={`nav-${item.toLowerCase()}`}
               className={`text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-500 hover:scale-105 ${scrolled ? 'text-foreground/60 hover:text-foreground' : 'text-white/60 hover:text-white'
                 }`}
             >
@@ -66,7 +69,18 @@ export default function Header() {
         </nav>
 
         {/* Desktop Auth Buttons */}
-        <div className="hidden md:flex items-center space-x-6">
+        <div className="hidden md:flex items-center space-x-4">
+          <motion.button
+            data-tour="tour-trigger"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={startTour}
+            aria-label="Start tour"
+            className={`p-2 rounded-full transition-colors ${scrolled ? 'text-foreground/50 hover:text-foreground hover:bg-foreground/5' : 'text-white/50 hover:text-white hover:bg-white/10'}`}
+          >
+            <Compass className="h-4 w-4" />
+          </motion.button>
+          <div className="w-px h-4 bg-white/10" />
           {user ? (
             <div className="flex items-center space-x-6">
               <div className={`px-4 py-1.5 rounded-full border text-xs font-semibold transition-all duration-500 ${scrolled ? 'bg-background/50 border-foreground/10 text-foreground' : 'bg-white/5 border-white/10 text-white'

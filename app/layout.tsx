@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Manrope, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { TourProvider } from "@/contexts/TourContext";
+import AppTour from "@/components/AppTour";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import LayoutWrapper from "@/components/LayoutWrapper";
@@ -39,9 +41,12 @@ export default function RootLayout({
         className={`${manrope.variable} ${jetbrainsMono.variable} font-sans antialiased`}
       >
         <AuthProvider>
-          <Header />
-          <LayoutWrapper>{children}</LayoutWrapper>
-          <Footer />
+          <TourProvider>
+            <AppTour />
+            <Header />
+            <LayoutWrapper>{children}</LayoutWrapper>
+            <Footer />
+          </TourProvider>
         </AuthProvider>
       </body>
     </html>
