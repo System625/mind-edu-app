@@ -5,8 +5,8 @@ import { usePathname } from 'next/navigation';
 
 const TOUR_STORAGE_KEY = 'mindedu_tour_completed';
 
-// Pages where the tour should never auto-start
-const EXCLUDED_PATHS = ['/auth/login', '/auth/signup'];
+// Only auto-start the tour on these paths
+const TOUR_START_PATHS = ['/dashboard', '/modules', '/quizzes', '/coping'];
 
 interface TourContextType {
   tourActive: boolean;
@@ -31,8 +31,8 @@ export function TourProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const seen = localStorage.getItem(TOUR_STORAGE_KEY);
-    const isExcluded = EXCLUDED_PATHS.some((p) => pathname.startsWith(p));
-    if (!seen && !isExcluded) {
+    const isAllowed = TOUR_START_PATHS.some((p) => pathname.startsWith(p));
+    if (!seen && isAllowed) {
       setHasSeenTour(false);
       const timer = setTimeout(() => setTourActive(true), 800);
       return () => clearTimeout(timer);
