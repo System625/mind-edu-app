@@ -84,66 +84,80 @@ export default function AppTour() {
       callback={handleCallback}
       styles={{
         options: {
-          primaryColor: 'hsl(262 80% 60%)',
-          backgroundColor: 'hsl(224 71% 4%)',
-          textColor: 'hsl(213 31% 91%)',
-          arrowColor: 'hsl(224 71% 4%)',
-          overlayColor: 'rgba(0, 0, 0, 0.65)',
+          // Matches --primary: oklch(0.55 0.15 220) calming blue
+          primaryColor: 'oklch(0.55 0.15 220)',
+          // Matches --card: oklch(1 0 0) light / oklch(0.22 0.02 240) dark
+          backgroundColor: '#ffffff',
+          // Matches --foreground: oklch(0.25 0.02 250)
+          textColor: '#2d3450',
+          arrowColor: '#ffffff',
+          overlayColor: 'rgba(18, 24, 48, 0.55)',
           zIndex: 10000,
         },
-        tooltipContainer: {
-          borderRadius: '16px',
-          border: '1px solid rgba(255,255,255,0.08)',
-          backdropFilter: 'blur(24px)',
-        },
         tooltip: {
-          borderRadius: '16px',
-          padding: '20px 24px',
+          borderRadius: '20px',
+          padding: '24px 28px',
+          boxShadow: '0 8px 40px rgba(60, 90, 180, 0.12), 0 2px 8px rgba(0,0,0,0.08)',
+          border: '1px solid oklch(0.90 0.01 220)',
         },
         tooltipTitle: {
-          fontSize: '16px',
+          fontSize: '15px',
           fontWeight: 700,
+          color: '#2d3450',
           marginBottom: '8px',
+          letterSpacing: '-0.01em',
         },
         tooltipContent: {
           fontSize: '14px',
-          lineHeight: '1.6',
+          lineHeight: '1.65',
+          color: '#5a6480',
           padding: '0',
         },
         tooltipFooter: {
-          marginTop: '16px',
+          marginTop: '20px',
+          gap: '8px',
         },
         buttonNext: {
-          backgroundColor: 'hsl(262 80% 60%)',
+          backgroundColor: 'oklch(0.55 0.15 220)',
           borderRadius: '999px',
-          fontSize: '12px',
+          fontSize: '11px',
           fontWeight: 700,
-          letterSpacing: '0.08em',
+          letterSpacing: '0.1em',
           textTransform: 'uppercase',
-          padding: '8px 20px',
+          padding: '9px 22px',
+          color: '#ffffff',
+          border: 'none',
         },
         buttonBack: {
-          color: 'hsl(213 31% 91% / 0.6)',
-          fontSize: '12px',
+          color: '#5a6480',
+          fontSize: '11px',
           fontWeight: 700,
-          letterSpacing: '0.08em',
+          letterSpacing: '0.1em',
           textTransform: 'uppercase',
-          marginRight: '8px',
+          marginRight: '4px',
+          background: 'transparent',
+          border: 'none',
         },
         buttonSkip: {
-          color: 'hsl(213 31% 91% / 0.4)',
+          color: '#9ba3bf',
           fontSize: '12px',
-          fontWeight: 600,
+          fontWeight: 500,
+          background: 'transparent',
+          border: 'none',
         },
         spotlight: {
-          borderRadius: '12px',
+          borderRadius: '14px',
+          border: '2px solid oklch(0.55 0.15 220 / 0.3)',
+        },
+        beacon: {
+          display: 'none',
         },
       }}
       locale={{
         back: 'Back',
         close: 'Close',
         last: 'Done',
-        next: 'Next',
+        next: 'Next →',
         skip: 'Skip tour',
       }}
     />
