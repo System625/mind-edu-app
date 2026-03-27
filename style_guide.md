@@ -1,68 +1,142 @@
-# Mind-Edu App Style Guide
+Hello Olamiposi Tunde-Ajayi,  
 
-> [!NOTE]
-> This guide defines the design system for the Mind-Edu application, focusing on a calming, supportive aesthetic while adopting the high-impact structural and typographic patterns of premium modern web apps.
+The wait is over; the DevCareer × Raenest Freelancer Hackathon officially begins today, March 18!
 
-## 1. Color Palette (OKLCH)
+This is your moment to build, share, and showcase your work with the community.
 
-We maintain a calming, supportive palette to align with the mental health and education theme.
+What You Can Submit
+You can submit either:
+• a project you previously built
+• or something you create during the hackathon week
 
-### Theme Colors
-- **Background** (`--background`): `oklch(0.98 0.008 220)` - Soft, calming blue-tinted white.
-- **Foreground** (`--foreground`): `oklch(0.25 0.02 250)` - Deep blue-gray for high readability.
-- **Primary** (`--primary`): `oklch(0.55 0.15 220)` - Serene medium blue, used for main actions.
-- **Secondary** (`--secondary`): `oklch(0.60 0.12 160)` - Soft teal/green, representing growth and calm.
-- **Accent** (`--accent`): `oklch(0.70 0.14 180)` - Gentle cyan for highlights and micro-interactions.
+Categories
+Submit your project under one of these:
 
-## 2. Typography Hierarchy (The Scale)
+Design: UI mockups, branding kits, social media assets, presentation designs
 
-Inspired by high-end design, we use bold, geometric typography with semantic sizing tokens.
+Writing: Blog posts, copywriting, technical documentation, content strategy
 
-| Token Name | Tailwind Class | Usage |
-| :--- | :--- | :--- |
-| **The Giant Hero** | `text-6xl md:text-8xl font-bold tracking-tight leading-[0.9]` | Landing page hero headlines |
-| **The Bold Statement** | `text-4xl md:text-5xl font-bold tracking-tight` | Sector/Page headings |
-| **The Section Header** | `text-2xl md:text-3xl font-semibold` | Sub-sections and large card titles |
-| **The UI Label** | `text-xs font-bold uppercase tracking-widest text-foreground/60` | Metadata, tags, small headers |
-| **The Body Standard** | `text-lg md:text-xl leading-relaxed text-foreground/80` | Main content text |
+Coding: Web apps, APIs, automation tools, open source contributions
 
-## 3. Spacing & Layout System
+What You Need to Do
+To participate fully:
 
-We use a responsive spacing system to ensure a "Premium" breathable feel.
+• Share your project on social media (X/Twitter preferred)
+• Tag @dev_careers and @RaenestApp
+• Use the hashtag #RaenestXDevCareer
+• Submit your project using the form below
 
-- **Max Container Width**: `max-w-7xl` (80rem / 1280px).
-- **Hero Vertical Spacing**: `py-24 md:py-40` - Ample padding for focal sections.
-- **Section Gap**: `space-y-24` - To separate distinct functional areas.
-- **Inner Padding**: `p-8 md:p-12` - For cards and glass panels to feel expensive.
+👉 Submission Form:
+https://docs.google.com/forms/d/e/1FAIpQLSeL35K6r4WFglJKz-thyI0k2MAciq7JkwqGQnjDth1fc54jvQ/viewform
 
-## 4. UX & Animation "Magic" (21st.dev Inspired)
+Timeline
+Hackathon Kickoff: March 18 (Today)
 
-We use **Framer Motion** and **Tailwind Animate** to create a "living" interface.
+Build & Social Media Showcase: March 18 – March 24
 
-### Animation Tokens
-- **Snappy**: `0.3s` | **Smooth**: `0.5s` | **Fluid**: `0.8s`.
-- **Easing**: `cubic-bezier(0.16, 1, 0.3, 1)` (Out-Expo) for premium entrance reveals.
+Submission Deadline: March 24
 
-### Signature Patterns
-1.  **Entrance Reveals**: Staggered `opacity: 0` and `y: 20` to `y: 0`.
-2.  **Shiny Surfaces**: Subtle light-sweep effects on primary buttons.
-3.  **Scroll Parallax**: Gentle Y-axis offset on decorative background shapes.
+Judging: March 25 – March 29
 
-## 5. Components & High-End FX
+Winners Announcement: March 30
 
-### Glassmorphism (The "Pro" Standard)
-Glass effects must shift subtly between themes to remain legible and premium.
+Rewards
+We’ll select 30 winners across all categories, and each winner will receive $100.
 
-| Mode | Background Fill | Border Style | Blur Radius |
-| :--- | :--- | :--- | :--- |
-| **Light** | `rgba(255, 255, 255, 0.4)` | `1px solid rgba(0, 0, 0, 0.1)` | `24px` |
-| **Dark** | `rgba(30, 41, 59, 0.4)` | `1px solid rgba(255, 255, 255, 0.1)` | `24px` |
 
-### Interaction Patterns
-- **Hover Scale**: Use `scale-[1.02]` for cards to avoid pixel blurring on lower DPI screens.
-- **Tap Feedback**: Always include a `whileTap={{ scale: 0.98 }}` for tactile response.
+Support DevCareer <support@devcareer.io>
+Tue, Mar 17, 8:13 AM (4 days ago)
+to me
 
----
+Hi Olamiposi Tunde-Ajayi,  
 
-### Implementation Note
-Styles are integrated via Tailwind CSS v4 and Framer Motion. All new components must prioritize structural impact, spacing, andlegibility across both light and dark modes.
+Thank you for applying to the DevCareer × Raenest Freelancer Hackathon! We're thrilled to have you on board. This email contains everything you need to know before, during, and after the hackathon; please read it carefully from start to finish so you're fully prepared.
+
+─────────────────────────
+FULL TIMELINE AT A GLANCE
+─────────────────────────
+Hackathon Kickoff (March 18): The official start of the hackathon. You may begin working on your project from this date.
+
+Build & Create Period (March 18 – March 24): This is your one-week window to work on and refine your project. Use this time wisely.
+
+Social Media Showcase  March 18 – March 24 (during build week): While you're building, you are expected to share your project publicly on social media. This can be done at any point during the build week — you do not have to wait until your project is finished.
+
+Submission Deadline (March 24): All projects must be submitted via the official submission form by the end of March 24. Late submissions will not be accepted. The submission form link will be shared in the #hackathon Slack channel.
+
+Judging Period (March 25 – March 29): Our panel will review all submitted projects. Participants are not required to do anything during this period.
+
+Winners Announcement (March 30): The Top 30 winners across all three categories will be announced publicly.
+─────────────────────
+WHAT YOU CAN SUBMIT
+─────────────────────
+You have two options for what to submit:
+
+1. A project you have previously built — Something you've already created that you're proud of and want to showcase.
+2. Something new you build during the hackathon week (March 18 – March 24) — A fresh project created specifically for this challenge.
+
+Either option is completely valid. There is no advantage given to new projects over existing ones, or vice versa. What matters is the quality and relevance of your work.
+
+────────────────────────
+THE THREE CATEGORIES
+────────────────────────
+You must submit your project under one of the following three categories:
+
+Design: This includes UI/UX mockups, branding kits, logo design, social media graphics, pitch deck design, presentation templates, and any other visual/creative design work.
+
+Writing: This includes blog posts, copywriting, technical documentation, content strategy, newsletters, social media copy, and any other written content deliverables.
+
+Coding: This includes web applications, mobile apps, APIs, automation scripts, open source contributions, browser extensions, bots, and any other software or technical builds.
+
+Please choose the category that best fits your project. Each category will have its own winners.
+
+────────────────────────────────────
+WHAT YOU NEED TO DO TO PARTICIPATE FULLY
+────────────────────────────────────
+
+To be eligible for judging and prizes, you must complete ALL THREE of the following steps:
+
+STEP 1: Share your project on social media — Post about your project on any public social media platform (Twitter/X, LinkedIn, Instagram, etc.) during the build week (March 18 – 24). Your post should show or describe your project clearly.
+
+STEP 2: Tag the official accounts in your post — In your social media(X preferrably) post, you must tag both @dev_careers and @raenest. Posts that do not include both tags may not be counted. Make sure your account is set to public so your post is visible.
+
+STEP 3: Submit your project via the official form — Fill out and submit the official project submission form before the March 24 deadline. This form will be shared exclusively in the #hackathon channel on the DevCareer Slack. Make sure you have joined the Slack community (see below).
+
+⚠️ Important: Completing only one or two of these steps will disqualify you from winning. All three are required.
+
+───────────────
+PRIZES
+───────────────
+
+At the end of the challenge, 30 winners will be selected across all three categories. Each winner receives $100. Winners will be announced on March 30.
+
+────────────────────────────────
+JOIN THE DEVCAREER SLACK COMMUNITY 
+────────────────────────────────
+
+All official hackathon communication will happen in the DevCareer Slack community. 
+Please join using the link below: http://bit.ly/devcareerafrica
+
+Once you've joined, immediately look for and join the #hackathon channel. This is where we will post:
+• Official announcements and rule updates
+• Reminders about deadlines
+• The submission form link
+• Answers to frequently asked questions
+
+If you have questions during the hackathon, please ask them in the #hackathon channel rather than replying to this email, as our team monitors Slack actively.
+
+────────────────────────────────
+QUICK ANSWERS TO COMMON QUESTIONS
+────────────────────────────────
+
+Can I submit more than one project? We recommend submitting your best single project. 
+
+Can I work in a team? This hackathon is designed for individual freelancers. 
+
+What format should my submission be in? This depends on your category. Designers may submit links to Figma files, PDFs, or image portfolios. Writers may submit Google Docs, blog post URLs, or PDF documents. Coders may submit GitHub repositories, live deployment links, or both. Full formatting requirements will be detailed in the submission form.
+
+When and how will winners be paid? All 30 winners will be paid directly via Raenest. To receive your prize, you will need to download the Raenest app and have your account set up and ready. Payment will be processed after the winners are announced on March 30. 
+
+We’re looking forward to seeing the work you share with the community.
+
+Regards,
+The DevCareer Team
